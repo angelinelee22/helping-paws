@@ -55,8 +55,7 @@
         // Perform query
         $username = htmlentities($_SESSION['adminname']);
         if ($result = $connection -> query("SELECT * FROM Employees WHERE Username='$username'")) {
-            echo "<h2 style='text-align: left'>Personal Information</h1>
-            <p>Please contact your IT administrator at angeline.lee01@sjsu.edu to modify this information.</p>
+            echo "<h2 style='text-align: left'>Dogs</h1>
             <table border='1'>
             <tr>
             <th>EmployeeID</th>
@@ -99,7 +98,7 @@
         // Perform query
         $username = htmlentities($_SESSION['adminname']);
         if ($result = $connection -> query("SELECT * FROM customer")) {
-            echo "<h2 style='text-align: left'>Employment Status</h1>
+            echo "<h2 style='text-align: left'>Customers</h1>
             <table border='1'>
             <tr>
             <th>Username</th>
