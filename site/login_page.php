@@ -1,11 +1,20 @@
 <?php
+    session_start();
+    include('navbar.php');
+    echo "<style>";
+    include_once('style/navbar.css');
+    echo "</style>";
+
+    if(isset($_SESSION['username']) || isset($_SESSION['adminname'])) {
+        header('Location:home.php');
+    }
+
     require 'login.php';
     $connection = new mysqli($hn, $un, $pw, $db);
     
     echo '<head><script type="text/JavaScript"></script></head>
         <form style="text-align: center" method="post" enctype="multipart/form-data" onsubmit="return validateLogin(this)">
             <h1>Login</h1>
-            <p>Please login</p>
 
             <input size="36" type="text" placeholder="Username" name="username" required>
 
@@ -16,10 +25,10 @@
             <input type="checkbox" name="admin">Administrator Login<br />
 
             <br>
-            <button type="submit" class="loginbtn">Login</button> Don\'t have an account? <a href="signup_page.php">Sign Up</a>
-
+            <button type="submit" class="loginbtn">Login</button> 
+            
             <br><br>
-            <p>Admin? <a href="admin.php">Click Here</a></p>
+            Don\'t have an account? <a href="signup_page.php">Sign Up</a>
         </form>';
 
     if (isset($_POST['username']) && isset($_POST['password'])) {
