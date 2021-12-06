@@ -3,7 +3,7 @@ session_start();
 include('navbar.php');
 echo "<style>";
 include_once('style/navbar.css');
-include_once('style/admin.css');
+include_once('style/admin_profile.css');
 echo "</style>";
 
 if (isset($_SESSION['adminname'])) {
