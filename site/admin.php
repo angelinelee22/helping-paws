@@ -58,22 +58,22 @@ function displayTable($first) {
     }
     
     // Perform query
-    $username = htmlentities($_SESSION['username']);
-    if ($result = $connection -> query("SELECT * FROM dogs")) {
-        echo "<h1 style='text-align: left'>Looking for a home</h1>
+    $username = htmlentities($_SESSION['adminname']);
+    if ($result = $connection -> query("SELECT * FROM Employees WHERE Username=$username")) {
+        echo "<h1 style='text-align: left'>Personal Information</h1>
         <table border='1'>
         <tr>
-        <th>Favorite</th>
-        <th>Name</th>
-        <th>Photo</th>
+        <th>EmployeeID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email Address on File</th>
         <th>Age</th>
-        <th>Breed</th>
-        <th>Notes</th>
+        <th>Phone Number</th>
         </tr>";
 
         $row_count = 1;
         while($row = mysqli_fetch_array($result)) {
-            echo "<tr><td>" . "<button onclick='makeFavorite()'>Favorite</button>" . "</td><td>" . $row['Name'] . "</td><td>" . "<img style='height: 150px; width: 150px;' src='data:image/jpeg;base64,".base64_encode( $row['Photo'] )."'/>" . "</td><td>" . $row['Age'] . "</td><td>" . $row['Breed'] . "</td><td>" . $row['Notes'] . "</td></tr>";
+            echo "<tr><td>" . $row['EmployeeID'] . "</td><td>" . $row['FirstName'] . "</td><td>" . $row['LastName'] . "</td><td>" . $row['EmailAddress'] . "</td><td>". $row['Age'] . "</td><td>". $row['PhoneNumber'] . "</td></tr>";
             $row_count++;    
         }
         echo "</table>";
@@ -88,13 +88,6 @@ if(htmlentities(isset($_POST['submit']), ENT_QUOTES))
 {
     submitFile();
 } 
-
-if(htmlentities(isset($_POST['logout']), ENT_QUOTES)) {
-    $_SESSION = array(); // Delete all the information in the array
-    setcookie(session_name(), '', time() - 2592000, '/');
-    session_destroy();
-    header("Location: login_page.php");
-}
 
 function strposX($haystack, $needle, $number = 0)
 {

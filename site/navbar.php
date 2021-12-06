@@ -1,16 +1,24 @@
 <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <?php if(isset($_SESSION['adminname']) || isset($_SESSION['username'])): ?>
+    <a class="active" href="home.php">Home</a>
+    <?php if(isset($_SESSION['username']) || isset($_SESSION['adminname'])): ?>
         <div class="topnav-right" id="login">
             <form method='POST'>
-                <input type='submit' name='logout' class='button' value='Logout' />
+                <a href="admin.php">Profile</a>
+                <input type='submit' name='logout' value='Logout' />
             </form>
-            <a href="login_page.php">Log Out</a>
         </div>
     <?php else: ?>
         <div class="topnav-right" id="login">
             <a href="login_page.php">Login</a>
             <a href="signup_page.php">Sign Up</a>
         </div>
-    <?php endif; ?>
+    <?php endif; ?> 
 </div>
+
+<?php if(htmlentities(isset($_POST['logout']), ENT_QUOTES)) {
+    $_SESSION = array(); // Delete all the information in the array
+    setcookie(session_name(), '', time() - 2592000, '/');
+    session_destroy();
+    header("Location: login_page.php");
+}
+?>

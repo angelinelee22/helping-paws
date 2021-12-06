@@ -5,15 +5,35 @@
     echo<<<_END
     <head><script type="text/JavaScript"></script></head>
     <body>
-        <form style="text-align: center" method="post" enctype="multipart/form-data" onsubmit="return validateSignup(this)">
+        <form style="text-align: left" method="post" enctype="multipart/form-data" onsubmit="return validateSignup(this)">
             <h1>Create an Account</h1>
+            <p>For admin accounts, please make them directly on the SQL DBMS.</p>
 
+            Email <br>
             <input size="36" type="text" placeholder="Email" name="email" required>
 
-            <br><br>
+            <br><br> First Name <br>
+            <input size="36" type="text" placeholder="First Name" name="firstname" required>
+
+            <br><br> Last Name <br>
+            <input size="36" type="text" placeholder="Last Name" name="lastname" required>
+
+            <br><br> Age <br>
+            <select name="age">
+_END;
+            for ($i = 21; $i <= 99; $i++) {
+                echo '<option value="' . $i . '">'. $i . '</option>';
+            }
+    echo<<<_END
+            </select>
+
+            <br><br> Phone Number <br>
+            <input size="36" type="text" placeholder="Phone Number" name="phonenumber" required>
+
+            <br><br> Username <br>
             <input size="36" type="text" placeholder="Username" name="username" required>
 
-            <br><br>
+            <br><br> Password <br>
             <input size="36" type="password" placeholder="Password" name="password" required>
 
             <br><br>
@@ -27,21 +47,21 @@ _END;
         $username = get_post($connection, 'username');
         $password = get_post($connection, 'password');
         $email = get_post($connection, 'email');
+        $firstname = get_post($connection, 'firstname');
+        $lastname = get_post($connection, 'lastname');
+        $age = get_post($connection, 'age');
+        $phonenumber = get_post($connection, 'phonenumber');
         
         $username = htmlentities($username);
         $password = htmlentities($password);
         $email = htmlentities($email);
+        $firstname = htmlentities($firstname);
+        $lastname = htmlentities($lastname);
+        $age = htmlentities($age);
+        $phonenumber = htmlentities($phonenumber);
 
         $fail = "";
-        if ($username == "") {
-            $fail = $fail . "No username was entered<br>";
-        }
-        if ($password == "") {
-            $fail = $fail . "No password was entered<br>";
-        }
-        if ($email == "") {
-            $fail = $fail . "No email was entered<br>";
-        }
+
         if (!preg_match('/^[a-zA-Z0-9-_]{5,}+$/', $username)) {
             $fail = $fail . "Username does not meet requirements<br>";
         }
@@ -56,11 +76,11 @@ _END;
             echo die($fail);
         }
 
-        add_user($connection, $email, $username, $password);
+        add_user($connection, $email, $username, $password, $firstname, $lastname, $age, $phonenumber);
     }
 
-    function add_user($connection, $em, $un, $pw) {
-        $query = "INSERT INTO customers VALUES('$em', '$un', '$pw')";
+    function add_user($connection, $em, $un, $pw, $fn, $ln, $age, $pn) {
+        $query = "INSERT INTO Customer (Username, Password, FirstName, LastName, Age, Email, PhoneNumber) VALUES ('$un', '$pw', '$fn', '$ln', '$age', '$em', '$pn');";
         $result = $connection->query($query);
         if (!$result) {
             die($connection->error);

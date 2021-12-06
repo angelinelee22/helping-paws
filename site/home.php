@@ -1,31 +1,18 @@
 <?php
-    include('nav-bar.php');
     session_start();
+    include('navbar.php');
+    echo "<style>";
+    include_once('style/navbar.css');
+    echo "</style>";
     if (isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
         $password = $_SESSION['password'];
-        echo "Welcome back $username.<br>";
-
-        echo "
-        <head><script type='text/JavaScript' src='validate_functions.js'></script></head>
-        <body style='text-align:center;'> 
-            
-            <h1> 
-                Upload File
-            </h1>     
-        <form method='post' enctype='multipart/form-data' onsubmit='return validateInput(this)'>
-            Text input: <input type='text' placeholder='File Name' name='user_input'/>&emsp; 
-            Select File: <input type='file' name='filename' size='10'/>   
-            <input type='submit' value='Submit' name='submit'/>
-        </form>
-        <br>
-        <form method='POST'>
-            <input type='submit' name='logout' class='button' value='Logout' />
-        </form>
-        <br>
-
-        </body>";
-        //onsubmit='return validateInput(this)'
+        echo "Welcome back $username.";
+    } elseif (isset($_SESSION['adminname'])) {
+        $username = $_SESSION['adminname'];
+        $password = $_SESSION['password'];
+        echo "Welcome back $username (admin).";
+    }
 
     displayTable(TRUE);
 
@@ -33,20 +20,19 @@
     if ($_FILES)
     {
         $filename = htmlentities($_FILES['filename']['name'], ENT_QUOTES);
-        if(htmlentities($_FILES['filename']['type'] == 'image/png', ENT_QUOTES) || htmlentities($_FILES['filename']['type'] == 'image/jpeg', ENT_QUOTES)) {
-            $n = "test.jpg";
+        if(htmlentities($_FILES['filename']['type'] == 'text/plain', ENT_QUOTES)) {
+            $n = "test.txt";
             htmlentities(move_uploaded_file($_FILES['filename']['tmp_name'], $n), ENT_QUOTES);
-            echo "Uploaded img file '$filename' as '$n':<br>";
+            echo "Uploaded text file '$filename' as '$n':<br>";
             fileHandler($n);
         } else {
-        echo die("Only JPG, JPEG, and PNG files are accepted. <br>");
+        echo die("Only TXT files are accepted. <br>");
         }
     } else {
         echo die("No file has been uploaded. <br>");
     };
     displayTable(FALSE);
     }
-}
 
 function fileHandler($filename) {
     require 'login.php';
@@ -86,22 +72,21 @@ function displayTable($first) {
     }
     
     // Perform query
-    $username = htmlentities($_SESSION['username']);
-    if ($result = $connection -> query("SELECT * FROM dogs")) {
+    if ($result = $connection -> query("SELECT * FROM Dog")) {
         echo "<h1 style='text-align: left'>Looking for a home</h1>
         <table border='1'>
         <tr>
         <th>Favorite</th>
-        <th>Name</th>
-        <th>Photo</th>
-        <th>Age</th>
         <th>Breed</th>
-        <th>Notes</th>
+        <th>Photo</th>
+        <th>Personality</th>
+        <th>Sex</th>
+        <th>Age</th>
         </tr>";
 
         $row_count = 1;
         while($row = mysqli_fetch_array($result)) {
-            echo "<tr><td>" . "<button onclick='makeFavorite()'>Favorite</button>" . "</td><td>" . $row['Name'] . "</td><td>" . "<img style='height: 150px; width: 150px;' src='data:image/jpeg;base64,".base64_encode( $row['Photo'] )."'/>" . "</td><td>" . $row['Age'] . "</td><td>" . $row['Breed'] . "</td><td>" . $row['Notes'] . "</td></tr>";
+            echo "<tr><td>" . "<button onclick='makeFavorite()'>Favorite</button>" . "</td><td>" . $row['BreedID'] . "</td><td>" . "<img style='height: 150px; width: 180px;' src='data:image/jpeg;base64,".base64_encode( $row['Image'] )."'/>" . "</td><td>" . $row['Personality'] . "</td><td>" . $row['Sex'] . "</td><td>" . $row['Age'] . "</td></tr>";
             $row_count++;    
         }
         echo "</table>";
@@ -116,12 +101,7 @@ if(htmlentities(isset($_POST['submit']), ENT_QUOTES))
     submitFile();
 } 
 
-if(htmlentities(isset($_POST['logout']), ENT_QUOTES)) {
-    $_SESSION = array(); // Delete all the information in the array
-    setcookie(session_name(), '', time() - 2592000, '/');
-    session_destroy();
-    header("Location: login_page.php");
-}
+
 
 function strposX($haystack, $needle, $number = 0)
 {

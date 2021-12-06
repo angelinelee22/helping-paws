@@ -41,21 +41,22 @@
         }
 
         if(isset($_POST['admin'])) {
-            $query = "SELECT * FROM employees WHERE username='$un_temp'";
+            $query = "SELECT * FROM Employees WHERE username='$un_temp'";
             $result = $connection->query($query); 
             if (!$result) die($connection->error);
             elseif ($result->num_rows) {
                 $row = $result->fetch_array(MYSQLI_NUM);
                 $result->close();
-                if ($pw_temp == $row[2]) {
+                echo $row[4];
+                if ($pw_temp == $row[4]) {
                     session_start();
                     $_SESSION['adminname'] = $un_temp;
                     $_SESSION['password'] = $pw_temp;
-                    header('Location:admin.php');
+                    header('Location:home.php');
                 } else die("Invalid username/password combination");
             } else die("Invalid username/password combination");
         } else {
-            $query = "SELECT * FROM customers WHERE username='$un_temp'";
+            $query = "SELECT * FROM Customer WHERE username='$un_temp'";
             $result = $connection->query($query); 
             if (!$result) die($connection->error);
             elseif ($result->num_rows) {
@@ -65,7 +66,7 @@
                     session_start();
                     $_SESSION['username'] = $un_temp;
                     $_SESSION['password'] = $pw_temp;
-                    header('Location:user.php');
+                    header('Location:home.php');
                 } else die("Invalid username/password combination");
             } else die("Invalid username/password combination");
         }

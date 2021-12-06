@@ -1,4 +1,8 @@
 <?php
+    include('navbar.php');
+    echo "<style>";
+    include_once('style/navbar.css');
+    echo "</style>";
     session_start();
     if (isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
