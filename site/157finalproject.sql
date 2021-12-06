@@ -90,6 +90,7 @@ INSERT INTO CriminalRecord (CustomerID, CriminalRecordName) VALUES (3, "NO PRIOR
 
 CREATE TABLE PastHistory (
 	HistoryID			INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	DogID				INTEGER,
 	PastOrganization	VARCHAR(128),
 	PastOwner 			VARCHAR(64),
 	PRIMARY KEY (HistoryID),
