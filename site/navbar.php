@@ -4,7 +4,7 @@
         <div class="topnav-right" id="login">
             <form method='POST'>
                 <a href="admin.php">Profile</a>
-                <input type='submit' name='logout' value='Logout' />
+                <input type='submit' class='button' name='logout' value='Logout' />
             </form>
         </div>
     <?php else: ?>
@@ -14,6 +14,7 @@
         </div>
     <?php endif; ?> 
 </div>
+<br><br>
 
 <?php if(htmlentities(isset($_POST['logout']), ENT_QUOTES)) {
     $_SESSION = array(); // Delete all the information in the array

@@ -3,6 +3,7 @@
     include('navbar.php');
     echo "<style>";
     include_once('style/navbar.css');
+    include_once('style/home.css');
     echo "</style>";
     if (isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
@@ -76,17 +77,17 @@ function displayTable($first) {
         echo "<h1 style='text-align: left'>Looking for a home</h1>
         <table border='1'>
         <tr>
-        <th>Favorite</th>
-        <th>Breed</th>
-        <th>Photo</th>
-        <th>Personality</th>
-        <th>Sex</th>
-        <th>Age</th>
+            <th>Favorite</th>
+            <th>Breed</th>
+            <th>Photo</th>
+            <th>Personality</th>
+            <th>Sex</th>
+            <th>Age</th>
         </tr>";
 
         $row_count = 1;
         while($row = mysqli_fetch_array($result)) {
-            echo "<tr><td>" . "<button onclick='makeFavorite()'>Favorite</button>" . "</td><td>" . $row['BreedID'] . "</td><td>" . "<img style='height: 150px; width: 180px;' src='data:image/jpeg;base64,".base64_encode( $row['Image'] )."'/>" . "</td><td>" . $row['Personality'] . "</td><td>" . $row['Sex'] . "</td><td>" . $row['Age'] . "</td></tr>";
+            echo "<tr class='dog-row'><td>" . "<button onclick='makeFavorite()'>Favorite</button>" . "</td><td>" . $row['BreedID'] . "</td><td>" . "<img style='display: block; margin-left: auto; margin-right: auto; max-height: 150px; max-width: 180px;' src='data:image/jpeg;base64,".base64_encode( $row['Image'] )."'/>" . "</td><td>" . $row['Personality'] . "</td><td>" . $row['Sex'] . "</td><td>" . $row['Age'] . "</td></tr>";
             $row_count++;    
         }
         echo "</table>";

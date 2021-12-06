@@ -34,9 +34,9 @@ CREATE TABLE Employment (
     PRIMARY KEY (EmploymentID),
 	FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
 );
-INSERT INTO Employment (EmployeeID, Occupation, Pay, TimeWorking, EmploymentStatus) VALUES (1, "Manager", 30.00, 500, "Employed");
-INSERT INTO Employment (EmployeeID, Occupation, Pay, TimeWorking, EmploymentStatus) VALUES (2, "Veterinarian", 50.00, 800, "Employed");
-INSERT INTO Employment (EmployeeID, Occupation, Pay, TimeWorking, EmploymentStatus) VALUES (3, "Cashier", 17.0, 20, "Employed");
+INSERT INTO Employment (EmployeeID, Occupation, Pay, TimeWorking, EmploymentStatus) VALUES (1, "Manager", 30.00, 500, "Active");
+INSERT INTO Employment (EmployeeID, Occupation, Pay, TimeWorking, EmploymentStatus) VALUES (2, "Veterinarian", 50.00, 800, "Active");
+INSERT INTO Employment (EmployeeID, Occupation, Pay, TimeWorking, EmploymentStatus) VALUES (3, "Cashier", 17.0, 20, "Active");
 
 CREATE TABLE Customer (
 	CustomerID	INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
@@ -101,6 +101,18 @@ INSERT INTO PastHistory (DogID, PastOrganization, PastOwner) VALUES (1, "San Jos
 INSERT INTO PastHistory (DogID, PastOrganization, PastOwner) VALUES (2, "FIRST TIME IN ADOPTION SYSTEM", "NONE");
 INSERT INTO PastHistory (DogID, PastOrganization, PastOwner) VALUES (3, "San Diego PetSmart Center", "Key Anu Reeves");
 
+CREATE TABLE MedicalHistory (
+	MedicalHistoryID	INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	DogID				INTEGER,
+	NeuteredStatus		VARCHAR(16),
+	PRIMARY KEY (MedicalHistoryID),
+	FOREIGN KEY (DogID) REFERENCES Dog(DogID)
+);
+
+INSERT INTO MedicalHistory (DogID, NeuteredStatus) VALUES (1, "Neutered");
+INSERT INTO MedicalHistory (DogID, NeuteredStatus) VALUES (2, "Spayed");
+INSERT INTO MedicalHistory (DogID, NeuteredStatus) VALUES (3, "Neutered");
+
 CREATE TABLE Vaccination (
 	VaccinationID		INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	MedicalHistoryID 	INTEGER,
@@ -124,18 +136,6 @@ CREATE TABLE Ailment (
 INSERT INTO Ailment (AilmentName, MedicalHistoryID) VALUES ("Dog Flu", 1);
 INSERT INTO Ailment (AilmentName, MedicalHistoryID) VALUES ("TapeWorm", 2);
 INSERT INTO Ailment (AilmentName, MedicalHistoryID) VALUES ("NONE", 3);
-
-CREATE TABLE MedicalHistory (
-	MedicalHistoryID	INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	DogID				INTEGER,
-	NeuteredStatus		VARCHAR(16),
-	PRIMARY KEY (MedicalHistoryID),
-	FOREIGN KEY (DogID) REFERENCES Dog(DogID)
-);
-
-INSERT INTO MedicalHistory (DogID, NeuteredStatus) VALUES (1, "Neutered");
-INSERT INTO MedicalHistory (DogID, NeuteredStatus) VALUES (2, "Spayed");
-INSERT INTO MedicalHistory (DogID, NeuteredStatus) VALUES (3, "Neutered");
 
 CREATE TABLE CustomerInterests (
 	InterestID		INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
