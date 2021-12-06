@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('navbar.php');
+    include('components/navbar.php');
     echo "<style>";
     include_once('style/navbar.css');
     echo "</style>";
@@ -8,7 +8,7 @@
     if(isset($_SESSION['username']) || isset($_SESSION['adminname'])) {
         header('Location:home.php');
     }
-    
+
     require 'login.php';
     $connection = new mysqli($hn, $un, $pw, $db);
 

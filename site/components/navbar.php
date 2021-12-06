@@ -1,6 +1,7 @@
 <?php
     $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1); 
 ?>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 <div class="topnav">
     <a <?php if($curPageName == 'home.php') { echo 'class="active"';} ?> href="home.php">Home</a>
     <?php if(isset($_SESSION['username']) || isset($_SESSION['adminname'])): ?>
