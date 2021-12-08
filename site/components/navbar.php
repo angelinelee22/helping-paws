@@ -6,7 +6,8 @@
     <a <?php if($curPageName == 'home.php') { echo 'class="active"';} ?> href="home.php">Home</a>
     <?php if(isset($_SESSION['username']) || isset($_SESSION['adminname'])): ?>
         <?php if(isset($_SESSION['adminname'])): ?>
-            <a <?php if($curPageName == 'admin.php') { echo 'class="active"';} ?> href="admin.php">Admin Panel</a>
+            <a <?php if($curPageName == 'admin.php') { echo 'class="active"';} ?> href="admin-dogs.php">Dogs (A)</a>
+            <a <?php if($curPageName == 'admin.php') { echo 'class="active"';} ?> href="admin-dogs.php">Customers (A)</a>
             <div class="topnav-right" id="login">
             <form method='POST'>
                 <a <?php if($curPageName == 'admin_profile.php') { echo 'class="active"';} ?> href="admin_profile.php">Profile</a>

@@ -13,3 +13,12 @@ td {
     background-color: brown;
     color: #FFF;
 }
+
+.plus-sign {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#edit-form {
+    display: block;
+}

@@ -15,7 +15,7 @@
     if (isset($_SESSION['adminname'])) {
         $admin = $_SESSION['adminname'];
         $password = $_SESSION['password'];
-        echo "<h1 style='text-align:center;'>Employee Profile</h1>";
+        echo "<h1 style='text-align:center;'>Admin Panel</h1>";
     
         displayDogs(TRUE);
         displayCustomers(TRUE);
@@ -57,9 +57,8 @@
             exit();
         }
         
-        echo "<form name='dog-form' id='dog-form' method='post'>";
-        echo '';
         if ($result = $connection -> query("SELECT * FROM Dog INNER JOIN Breed WHERE Dog.BreedID = Breed.BreedID;" )) {
+            echo "<form name='dog-form' id='dog-form' method='post'>";
             echo "<h2 style='text-align: left'>Dogs</h1>
             <table border='1' id='dog-table'>
             <tr>
@@ -70,19 +69,56 @@
             <th>Weight</th>
             <th>Color</th>
             <th>Trained</th>
-            <th>Dog ID</th>
             </tr>";
     
             $row_count = 1;
             while($row = mysqli_fetch_array($result)) {
-                echo "<tr class='dog-row'><td>" . $row['Name'] . "</td><td>" . $row['BreedName'] . "</td><td>" . $row['Age'] . "</td><td>" . $row['Sex'] . "</td><td>". $row['Weight'] . "</td><td>". $row['Color'] . "</td><td>". $row['Trained'] . "</td><td>" . $row['DogID'] . '<input type="hidden" name="search-id" value=' . $row['DogID'] . '>' . "</td></tr>";
+                echo "<tr class='dog-row'><td>" . $row['Name'] . "</td><td>" . $row['BreedName'] . "</td><td>" . $row['Age'] . "</td><td>" . $row['Sex'] . "</td><td>". $row['Weight'] . "</td><td>". $row['Color'] . "</td><td>". $row['Trained'] . "</td><td style='display: none'>" . $row['DogID'] . "</td></tr>";
                 $row_count++;    
             }
             echo "</table>";
+            echo '<input type="hidden" class="search-id" name="search-id" value="0"' . $row['DogID'] . '>';
+            echo "</form>";
             // Free result set
             $result -> free_result();
         }
-        echo "</form>";
+
+        if (isset($_POST['search-id'])) {
+            $search_id = get_post($connection, 'search-id');
+            $dog_id = htmlentities($search_id);
+
+            if ($result = $connection -> query("SELECT * FROM Dog INNER JOIN Breed ON Dog.BreedID = Breed.BreedID WHERE DogID = $dog_id;" )) {
+                $row_count = 1;
+                $row = mysqli_fetch_array($result);
+
+                echo "<h3>" . $row['Name'] . "</h3>"; 
+
+                echo "<p><u>Information</u></p>";
+                echo "<form name='dog-form' id='dog-form' method='post'>";
+                echo 'Name: <input size="36" type="text" value="' . $row['Name'] . '" name="name" readonly><br>';
+                echo 'Age: <input size="36" type="text" value="' . $row['Age'] . '" name="age" readonly><br>';
+                echo 'Sex: <input size="36" type="text" value="' . $row['Sex'] . '" name="sex" readonly><br>';
+                echo 'Weight: <input size="36" type="text" value="' . $row['Weight'] . '" name="weight" readonly><br>';
+                echo 'Color: <input size="36" type="text" value="' . $row['Color'] . '" name="color" readonly><br>';
+                echo 'Trained: <input size="36" type="text" value="' . $row['Trained'] . '" name="trained" readonly><br>';
+                echo "</form>";
+                // Free result set
+                $result -> free_result();
+            }
+
+            if ($result = $connection -> query("SELECT * FROM Dog INNER JOIN PastHistory ON Dog.DogID = PastHistory.DogID WHERE Dog.DogID = $dog_id;" )) {
+                $row_count = 1;
+                $row = mysqli_fetch_array($result);
+
+                echo "<p><u>History</u></p>";
+                                echo "<form name='dog-form' id='dog-form' method='post'>";
+                echo 'Previous Organization: <input size="36" type="text" value="' . $row['PastOrganization'] . '" name="pastorg" readonly><br>';
+                echo 'Previous Owner: <input size="36" type="text" value="' . $row['PastOwner'] . '" name="pastowner" readonly><br>';
+                echo "</form>";
+                // Free result set
+                $result -> free_result();
+            }
+        }
 
         $connection -> close();
     }
@@ -143,7 +179,8 @@
     }
     echo "<script type='text/javascript' src='scripts/admin.js'></script>";
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    }
+    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // }
 
 ?>
