@@ -5,34 +5,12 @@
     include_once('style/navbar.css');
     include_once('style/admin.css');
     echo "</style>";
-    echo '<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-    
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-    
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
-    
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-    </script>';
-    echo "<script type='text/javascript' src='scripts/admin_js.js'></script>";
+    // echo '<script>$(document).ready(function(){
+    //     $("#dog-table tr:not(:first)").click(function(){
+    //         $(this).addClass("selected").siblings().removeClass("selected");   
+      
+    //     })
+    //   });</script>';
 
     if (isset($_SESSION['adminname'])) {
         $admin = $_SESSION['adminname'];
@@ -52,7 +30,6 @@
             echo die("No file name entered.");
         }
         $data = htmlentities(file_get_contents($filename), ENT_QUOTES);
-        $adminname = htmlentities($_SESSION['adminname']);
         $sql = "INSERT INTO files (Content_Name, File_Content, Username) VALUES ('$name', '$data', '$username')";
     
         if($connection -> query($sql) == TRUE) {
@@ -80,9 +57,11 @@
             exit();
         }
         
+        echo "<form name='dog-form' id='dog-form' method='post'>";
+        echo '';
         if ($result = $connection -> query("SELECT * FROM Dog INNER JOIN Breed WHERE Dog.BreedID = Breed.BreedID;" )) {
             echo "<h2 style='text-align: left'>Dogs</h1>
-            <table border='1' id='table'>
+            <table border='1' id='dog-table'>
             <tr>
             <th>Name</th>
             <th>Breed</th>
@@ -91,21 +70,23 @@
             <th>Weight</th>
             <th>Color</th>
             <th>Trained</th>
+            <th>Dog ID</th>
             </tr>";
     
             $row_count = 1;
             while($row = mysqli_fetch_array($result)) {
-                echo "<tr class='dog-row'><td>" . $row['Name'] . "</td><td>" . $row['BreedName'] . "</td><td>" . $row['Age'] . "</td><td>" . $row['Sex'] . "</td><td>". $row['Weight'] . "</td><td>". $row['Color'] . "</td><td>". $row['Trained'] . "</td></tr>";
+                echo "<tr class='dog-row'><td>" . $row['Name'] . "</td><td>" . $row['BreedName'] . "</td><td>" . $row['Age'] . "</td><td>" . $row['Sex'] . "</td><td>". $row['Weight'] . "</td><td>". $row['Color'] . "</td><td>". $row['Trained'] . "</td><td>" . $row['DogID'] . '<input type="hidden" name="search-id" value=' . $row['DogID'] . '>' . "</td></tr>";
                 $row_count++;    
             }
             echo "</table>";
             // Free result set
             $result -> free_result();
         }
-        
+        echo "</form>";
+
         $connection -> close();
     }
-    
+
     function displayCustomers($first) {
         if($first == TRUE) {
             ob_start();
@@ -118,6 +99,7 @@
         $connection = new mysqli($hn, $un, $pw, $db) or die ("Unable to connect");
     
         if ($connection -> connect_errno) {
+
             echo "Failed to connect to MySQL: " . $connection -> connect_error;
             exit();
         }
@@ -146,19 +128,6 @@
         
         $connection -> close();
     }
-
-    echo <<<_END
-    <button id="myBtn">Open Modal</button>
-
-    <div id="myModal" class="modal">
-
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
-    </div>
-
-    </div>
-_END;
     
     if(htmlentities(isset($_POST['submit']), ENT_QUOTES))
     {
@@ -172,4 +141,9 @@ _END;
             strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
         );
     }
-    ?>
+    echo "<script type='text/javascript' src='scripts/admin.js'></script>";
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    }
+
+?>

@@ -37,4 +37,8 @@ if(htmlentities(isset($_POST['logout']), ENT_QUOTES)) {
     header("Location: login_page.php");
 }
 
+function get_post($conn, $var) {
+    return $conn->real_escape_string($_POST[$var]);
+}
+
 ?>
