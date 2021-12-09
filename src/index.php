@@ -73,11 +73,11 @@ function displayTable($first) {
     }
     
     // Perform query
-    if ($result = $connection -> query("SELECT * FROM Dog")) {
+    if ($result = $connection -> query("SELECT * FROM Dog INNER JOIN Breed ON Dog.BreedID = Breed.BreedID;")) {
         echo "<h1 style='text-align: left'>Looking for a home</h1>
         <table border='1'>
         <tr>
-            <th>Favorite</th>
+            <th>Name</th>
             <th>Breed</th>
             <th>Photo</th>
             <th>Personality</th>
@@ -87,7 +87,7 @@ function displayTable($first) {
 
         $row_count = 1;
         while($row = mysqli_fetch_array($result)) {
-            echo "<tr class='dog-row'><td>" . "<button onclick='makeFavorite()'>Favorite</button>" . "</td><td>" . $row['BreedID'] . "</td><td>" . "<img style='display: block; margin-left: auto; margin-right: auto; max-height: 150px; max-width: 180px;' src='data:image/jpeg;base64,".base64_encode( $row['Image'] )."'/>" . "</td><td>" . $row['Personality'] . "</td><td>" . $row['Sex'] . "</td><td>" . $row['Age'] . "</td></tr>";
+            echo "<tr class='dog-row'><td>" . $row['Name'] . "</td><td>" . "<img style='display: block; margin-left: auto; margin-right: auto; max-height: 150px; max-width: 180px;' src='./img/" . $row['Image'] . "'/>" . "</td><td>" . $row['BreedName'] . "</td><td>" . $row['Personality'] . "</td><td>" . $row['Sex'] . "</td><td>" . $row['Age'] . "</td></tr>";
             $row_count++;    
         }
         echo "</table>";

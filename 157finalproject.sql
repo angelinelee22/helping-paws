@@ -75,9 +75,9 @@ CREATE TABLE Dog (
 	FOREIGN KEY (BreedID) REFERENCES Breed(BreedID)
 );
 
-INSERT INTO Dog (BreedID, Name, Personality, Color, Weight, DateArrived, DateLeft, Owner, AssignedVet, Age, Trained, Sex) VALUES (1, "Daisy", "Very polite and kind", "Brown/Blonde", 36.7, "2020-10-21", "2020-11-17", "Angeline Lee", "Dr. Matthew Klein", 12, "Trained in disability assistance", "Female");
-INSERT INTO Dog (BreedID, Name, Personality, Color, Weight, DateArrived, DateLeft, Owner, AssignedVet, Age, Trained, Sex) VALUES (2, "Scout", "Likes to bite as a show of love", "Pale White/Blonde", 25.5, "2019-11-02", "Has not been adopted", "Helping Paws", "Dr. Katie Veters", 10, "None", "Female");
-INSERT INTO Dog (BreedID, Name, Personality, Color, Weight, DateArrived, DateLeft, Owner, AssignedVet, Age, Trained, Sex) VALUES (3, "Teddy", "Very timid but likes to bark a lot", "White ", 13.6, "2007-02-16", "2007-02-17", "Kramer Krimson", "Dr. Ronaldo Craster", 7, "Potty-Trained", "Male");
+INSERT INTO Dog (BreedID, Name, Image, Personality, Color, Weight, DateArrived, DateLeft, Owner, AssignedVet, Age, Trained, Sex) VALUES (1, "Daisy", "daisy.jpg", "Very polite and kind", "Brown/Blonde", 36.7, "2020-10-21", "2020-11-17", "Angeline Lee", "Dr. Matthew Klein", 12, "Trained in disability assistance", "Female");
+INSERT INTO Dog (BreedID, Name, Image, Personality, Color, Weight, DateArrived, DateLeft, Owner, AssignedVet, Age, Trained, Sex) VALUES (2, "Scout", "scout.jpg", "Likes to bite as a show of love", "Pale White/Blonde", 25.5, "2019-11-02", "Has not been adopted", "Helping Paws", "Dr. Katie Veters", 10, "None", "Female");
+INSERT INTO Dog (BreedID, Name, Image, Personality, Color, Weight, DateArrived, DateLeft, Owner, AssignedVet, Age, Trained, Sex) VALUES (3, "Teddy", "teddy.jpg", "Very timid but likes to bark a lot", "White ", 13.6, "2007-02-16", "2007-02-17", "Kramer Krimson", "Dr. Ronaldo Craster", 7, "Potty-Trained", "Male");
 
 CREATE TABLE CriminalRecord (
 	CriminalRecordID	INTEGER NOT NULL AUTO_INCREMENT UNIQUE,

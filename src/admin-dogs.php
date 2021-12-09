@@ -5,12 +5,6 @@
     include_once('style/navbar.css');
     include_once('style/admin.css');
     echo "</style>";
-    // echo '<script>$(document).ready(function(){
-    //     $("#dog-table tr:not(:first)").click(function(){
-    //         $(this).addClass("selected").siblings().removeClass("selected");   
-      
-    //     })
-    //   });</script>';
 
     if (isset($_SESSION['adminname'])) {
         $admin = $_SESSION['adminname'];
@@ -73,7 +67,7 @@
     
             $row_count = 1;
             while($row = mysqli_fetch_array($result)) {
-                echo "<tr><td style='display: none'>" . $row['DogID'] . "</td><td>" . $row['Name'] . "</td><td>" . "<img style='display: block; margin-left: auto; margin-right: auto; max-height: 150px; max-width: 180px;' src='data:image/jpeg;base64,".base64_encode( $row['Image'] )."'/>" . "</td><td>" . $row['Age'] . "</td><td>" . $row['Sex'] . "</td><td>". $row['Weight'] . "</td><td>". $row['Color'] . "</td><td>". $row['Trained'] . "</td></tr>";
+                echo "<tr><td style='display: none'>" . $row['DogID'] . "</td><td>" . $row['Name'] . "</td><td>" . "<img style='display: block; margin-left: auto; margin-right: auto; max-height: 150px; max-width: 180px;' src='./img/" . $row['Image'] . "'/>" . "</td><td>" . $row['Age'] . "</td><td>" . $row['Sex'] . "</td><td>". $row['Weight'] . "</td><td>". $row['Color'] . "</td><td>". $row['Trained'] . "</td></tr>";
                 $row_count++;    
             }
             echo "</table>";
