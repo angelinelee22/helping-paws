@@ -75,22 +75,22 @@
 
                 echo "<p><u>Information</u>";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'First Name: <input type="text" value="' . (!empty($row['FirstName']) ? $row['FirstName'] : "") . '" name="firstname" readonly><br>';
-                    echo 'Last Name: <input type="text" value="' . (!empty($row['LastName']) ? $row['LastName'] : "") . '" name="lastname" readonly><br>';
-                    echo 'Username: <input type="text" value="' . (!empty($row['Username']) ? $row['Username'] : "") . '" name="uname" readonly><br>';
-                    echo 'Password: <input type="text" value="' . (!empty($row['Password']) ? $row['Password'] : "") . '" name="pword" readonly><br>';
-                    echo 'Age: <input type="text" value="' . (!empty($row['Age']) ? $row['Age'] : "") . '" name="age" readonly><br>';
-                    echo 'Email on File: <input type="text" value="' . (!empty($row['Email']) ? $row['Email'] : "") . '" name="email" readonly><br>';
-                    echo 'Phone Number: <input type="text" value="' . (!empty($row['PhoneNumber']) ? $row['PhoneNumber'] : "") . '" name="phonenumber" readonly><br>';
+                    echo 'First Name: <input type="text" value="' . ((!empty($row['FirstName']) && $row['FirstName'] != null) ? $row['FirstName'] : "") . '" name="firstname" readonly><br>';
+                    echo 'Last Name: <input type="text" value="' . ((!empty($row['LastName']) && $row['LastName'] != null) ? $row['LastName'] : "") . '" name="lastname" readonly><br>';
+                    echo 'Username: <input type="text" value="' . ((!empty($row['Username']) && $row['Username'] != null) ? $row['Username'] : "") . '" name="uname" readonly><br>';
+                    echo 'Password: <input type="text" value="' . ((!empty($row['Password']) && $row['Password'] != null) ? $row['Password'] : "") . '" name="pword" readonly><br>';
+                    echo 'Age: <input type="text" value="' . ((!empty($row['Age']) && $row['Age'] != null) ? $row['Age'] : "") . '" name="age" readonly><br>';
+                    echo 'Email on File: <input type="text" value="' . ((!empty($row['Email']) && $row['Email'] != null) ? $row['Email'] : "") . '" name="email" readonly><br>';
+                    echo 'Phone Number: <input type="text" value="' . ((!empty($row['PhoneNumber']) && $row['PhoneNumber'] != null) ? $row['PhoneNumber'] : "") . '" name="phonenumber" readonly><br>';
                 echo "</form></p>";
 
                 echo "<p>Address";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                     echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'Street: <input type="text" value="' . (!empty($row['Street']) ? $row['Street'] : "") . '" name="street" readonly><br>';
-                    echo 'City: <input type="text" value="' . (!empty($row['City']) ? $row['City'] : "") . '" name="city" readonly><br>';
-                    echo 'State: <input type="text" value="' . (!empty($row['State']) ? $row['State'] : "") . '" name="state" readonly><br>';
-                    echo 'Country: <input type="text" value="' . (!empty($row['Country']) ? $row['Country'] : "") . '" name="country" readonly><br>';
-                    echo 'Zip Code: <input type="text" value="' . (!empty($row['ZipCode']) ? $row['ZipCode'] : "") . '" name="zipcode" readonly><br>';
+                    echo 'Street: <input type="text" value="' . ((!empty($row['Street']) && $row['Street'] != null) ? $row['Street'] : "") . '" name="street" readonly><br>';
+                    echo 'City: <input type="text" value="' . ((!empty($row['City']) && $row['City'] != null) ? $row['City'] : "") . '" name="city" readonly><br>';
+                    echo 'State: <input type="text" value="' . ((!empty($row['State']) && $row['State'] != null) ? $row['State'] : "") . '" name="state" readonly><br>';
+                    echo 'Country: <input type="text" value="' . ((!empty($row['Country']) && $row['Country'] != null) ? $row['Country'] : "") . '" name="country" readonly><br>';
+                    echo 'Zip Code: <input type="text" value="' . ((!empty($row['ZipCode']) && $row['ZipCode'] != null) ? $row['ZipCode'] : "") . '" name="zipcode" readonly><br>';
                 echo "</form></p>";
                 // Free result set
                 $result -> free_result();
@@ -101,7 +101,7 @@
                 $row = mysqli_fetch_array($result);
                 echo "<p>Interests";  
                     echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'Time Commitment: <input type="text" value="' . (!empty($row['TimeCommitment']) ? $row['TimeCommitment'] : "") . '" name="firstname" readonly><br>';
+                    echo 'Time Commitment: <input type="text" value="' . ((!empty($row['TimeCommitment']) && $row['TimeCommitment'] != null) ? $row['TimeCommitment'] : "") . '" name="firstname" readonly><br>';
                 echo "</form></p>";
 
                 // Free result set
@@ -114,15 +114,15 @@
 
                 echo "<p><u>Background</u>";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'Salary: <input type="text" value="' . (!empty($row['Salary']) ? $row['Salary'] : "") . '" name="salary" readonly><br>';
-                    echo '# in Household: <input type="text" value="' . (!empty($row['NumPeopleHousehold']) ? $row['NumPeopleHousehold'] : "") . '" name="household" readonly><br>';
-                    echo '# Kids: <input type="text" value="' . (!empty($row['NumKids']) ? $row['NumKids'] : "") . '" name="kids" readonly><br>';
-                    echo '# Current Pets: <input type="text" value="' . (!empty($row['NumCurrPets']) ? $row['NumCurrPets'] : "") . '" name="currpets" readonly><br>';
-                    echo 'Budget: <input type="text" value="' . (!empty($row['BUDGET']) ? $row['BUDGET'] : "") . '" name="budget" readonly><br>';
+                    echo 'Salary: <input type="text" value="' . ((!empty($row['Salary']) && $row['Salary'] != null) ? $row['Salary'] : "") . '" name="salary" readonly><br>';
+                    echo '# in Household: <input type="text" value="' . ((!empty($row['NumPeopleHousehold']) && $row['NumPeopleHousehold'] != null) ? $row['NumPeopleHousehold'] : "") . '" name="household" readonly><br>';
+                    echo '# Kids: <input type="text" value="' . ((!empty($row['NumKids']) && $row['NumKids'] != null) ? $row['NumKids'] : "") . '" name="kids" readonly><br>';
+                    echo '# Current Pets: <input type="text" value="' . ((!empty($row['NumCurrPets']) && $row['NumCurrPets'] != null) ? $row['NumCurrPets'] : "") . '" name="currpets" readonly><br>';
+                    echo 'Budget: <input type="text" value="' . ((!empty($row['BUDGET']) && $row['BUDGET'] != null) ? $row['BUDGET'] : "") . '" name="budget" readonly><br>';
                 echo "</form></p>";
                 echo "<p>Criminal History";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'Crime Record: <input type="text" value="' . (!empty($row['CriminalRecordName']) ? $row['CriminalRecordName'] : "") . '" name="pastorg" readonly><br>';
+                    echo 'Crime Record: <input type="text" value="' . ((!empty($row['CriminalRecordName']) && $row['CriminalRecordName'] != null) ? $row['CriminalRecordName'] : "") . '" name="pastorg" readonly><br>';
                 echo "</form></p>";
                 // Free result set
                 $result -> free_result();
