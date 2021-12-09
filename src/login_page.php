@@ -59,7 +59,6 @@
             elseif ($result->num_rows) {
                 $row = $result->fetch_array(MYSQLI_NUM);
                 $result->close();
-                echo $row[4];
                 if ($pw_temp == $row[4]) {
                     session_start();
                     $_SESSION['adminname'] = $un_temp;

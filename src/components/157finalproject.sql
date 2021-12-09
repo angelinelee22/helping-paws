@@ -137,18 +137,17 @@ INSERT INTO Ailment (AilmentName, MedicalHistoryID) VALUES ("Dog Flu", 1);
 INSERT INTO Ailment (AilmentName, MedicalHistoryID) VALUES ("TapeWorm", 2);
 INSERT INTO Ailment (AilmentName, MedicalHistoryID) VALUES ("NONE", 3);
 
-CREATE TABLE CustomerInterests (
-	InterestID		INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-    BreedID 		INTEGER,
+CREATE TABLE CustomerAvail (
+	AvailID		INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	CustomerID		INTEGER,
 	TimeCommitment	VARCHAR(256),
 	PRIMARY KEY (InterestID),
-	FOREIGN KEY (BreedID) REFERENCES Breed(BreedID)
+	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 );
 
-INSERT INTO CustomerInterests (BreedID, CustomerID, TimeCommitment) VALUES (1, 1, "Not That Much Time");
-INSERT INTO CustomerInterests (BreedID, CustomerID, TimeCommitment) VALUES (2, 2, "I have a job but right now it is work at home. I would say 17 hours a day.");
-INSERT INTO CustomerInterests (BreedID, CustomerID, TimeCommitment) VALUES (3, 3, "24/7 but on occasion both me and my wife will leave the house");
+INSERT INTO CustomerAvail (CustomerID, TimeCommitment) VALUES (1, "Not That Much Time");
+INSERT INTO CustomerAvail (CustomerID, TimeCommitment) VALUES (2, "I have a job but right now it is work at home. I would say 17 hours a day.");
+INSERT INTO CustomerAvail (CustomerID, TimeCommitment) VALUES (3, "24/7 but on occasion both me and my wife will leave the house");
 
 CREATE TABLE CustomerBackground (
 	BackgroundID	INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
