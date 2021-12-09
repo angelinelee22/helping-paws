@@ -1,5 +1,5 @@
 <?php  // login.php
-    $hn = 'localhost';
+    $hn = 'db';
     $un = 'root';
     $pw = '';
     $db = 'testsql';
