@@ -131,10 +131,10 @@
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
                     echo 'Neutered: <input type="text" value="' . $row['NeuteredStatus'] . '" name="neutered" readonly><br>';
 
-                    echo "<p>Vaccinations <a class='plus-sign' id='add-vax'>&plus;</a></p>";
+                    echo "<p>Vaccinations</p>";
                     echo 'VaccinationName: <input type="text" value="' . $row['VaccinationName'] . '" name="name" readonly><br>';
 
-                    echo "<p>Ailments <a class='plus-sign' id='add-ail'>&plus;</a></p>";
+                    echo "<p>Ailments</p>";
                     echo 'Affliction: <input type="text" value="' . $row['AilmentName'] . '" name="name" readonly><br>';
                 echo "</form></p>";
                 // Free result set

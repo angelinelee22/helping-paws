@@ -67,13 +67,11 @@
             echo "<div id='edit-form'>";
             echo "<div id='form-info'>";
 
-            $profiled = !empty(mysqli_fetch_array($connection -> query("SELECT COUNT(*) FROM Customer WHERE Customer.CustomerID = $cust_id AND EXISTS (SELECT null FROM Address WHERE Customer.CustomerID = Address.CustomerID);"))[0]);
+            $profiled = !empty(mysqli_fetch_array($connection -> query("SELECT COUNT(*) FROM Customer WHERE Customer.CustomerID = $cust_id AND EXISTS (SELECT null FROM Address WHERE Customer.CustomerID = Address.CustomerID);"))[0]) ? 1 : 0;
 
-            if ($profiled ? $result = $connection -> query("SELECT * FROM Customer INNER JOIN `Address` ON Customer.CustomerID = Address.CustomerID WHERE Customer.CustomerID = $cust_id;") : $result = $connection -> query("SELECT * FROM Customer WHERE Customer.CustomerID = $cust_id;")) {
+            if ($profiled ? $result = $connection -> query("SELECT * FROM Customer INNER JOIN `Address` ON Customer.CustomerID = `Address`.CustomerID WHERE Customer.CustomerID = $cust_id;") : $result = $connection -> query("SELECT * FROM Customer WHERE Customer.CustomerID = $cust_id;")) {
                 $row_count = 1;
                 $row = mysqli_fetch_array($result);
-
-                echo "<h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>"; 
 
                 echo "<p><u>Information</u>";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
@@ -98,31 +96,14 @@
                 $result -> free_result();
             }
 
-            if ($profiled ? $result = $connection -> query("SELECT * FROM Customer INNER JOIN `Address` ON Customer.CustomerID = Address.CustomerID WHERE Customer.CustomerID = $cust_id;") : $result = $connection -> query("SELECT * FROM Customer WHERE Customer.CustomerID = $cust_id;")) {
+            if ($result = $connection -> query("SELECT * FROM Customer INNER JOIN `CustomerAvail` ON Customer.CustomerID = CustomerAvail.CustomerID WHERE Customer.CustomerID = $cust_id;")) {
                 $row_count = 1;
                 $row = mysqli_fetch_array($result);
-
-                echo "<h3>" . $row['FirstName'] . " " . $row['LastName'] . "</h3>"; 
-
-                echo "<p><u>Information</u>";
-                echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'First Name: <input type="text" value="' . (!empty($row['FirstName']) ? $row['FirstName'] : "") . '" name="firstname" readonly><br>';
-                    echo 'Last Name: <input type="text" value="' . (!empty($row['LastName']) ? $row['LastName'] : "") . '" name="lastname" readonly><br>';
-                    echo 'Username: <input type="text" value="' . (!empty($row['Username']) ? $row['Username'] : "") . '" name="uname" readonly><br>';
-                    echo 'Password: <input type="text" value="' . (!empty($row['Password']) ? $row['Password'] : "") . '" name="pword" readonly><br>';
-                    echo 'Age: <input type="text" value="' . (!empty($row['Age']) ? $row['Age'] : "") . '" name="age" readonly><br>';
-                    echo 'Email on File: <input type="text" value="' . (!empty($row['Email']) ? $row['Email'] : "") . '" name="email" readonly><br>';
-                    echo 'Phone Number: <input type="text" value="' . (!empty($row['PhoneNumber']) ? $row['PhoneNumber'] : "") . '" name="phonenumber" readonly><br>';
-                echo "</form></p>";
-
-                echo "<p>Address";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                echo "<p>Interests";  
                     echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'Street: <input type="text" value="' . (!empty($row['Street']) ? $row['Street'] : "") . '" name="street" readonly><br>';
-                    echo 'City: <input type="text" value="' . (!empty($row['City']) ? $row['City'] : "") . '" name="city" readonly><br>';
-                    echo 'State: <input type="text" value="' . (!empty($row['State']) ? $row['State'] : "") . '" name="state" readonly><br>';
-                    echo 'Country: <input type="text" value="' . (!empty($row['Country']) ? $row['Country'] : "") . '" name="country" readonly><br>';
-                    echo 'Zip Code: <input type="text" value="' . (!empty($row['ZipCode']) ? $row['ZipCode'] : "") . '" name="zipcode" readonly><br>';
+                    echo 'Time Commitment: <input type="text" value="' . (!empty($row['TimeCommitment']) ? $row['TimeCommitment'] : "") . '" name="firstname" readonly><br>';
                 echo "</form></p>";
+
                 // Free result set
                 $result -> free_result();
             }
@@ -139,7 +120,7 @@
                     echo '# Current Pets: <input type="text" value="' . (!empty($row['NumCurrPets']) ? $row['NumCurrPets'] : "") . '" name="currpets" readonly><br>';
                     echo 'Budget: <input type="text" value="' . (!empty($row['BUDGET']) ? $row['BUDGET'] : "") . '" name="budget" readonly><br>';
                 echo "</form></p>";
-                echo "<p>Criminal History  <a class='plus-sign' id='add-crim'>&plus;</a>";
+                echo "<p>Criminal History";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
                     echo 'Crime Record: <input type="text" value="' . (!empty($row['CriminalRecordName']) ? $row['CriminalRecordName'] : "") . '" name="pastorg" readonly><br>';
                 echo "</form></p>";
