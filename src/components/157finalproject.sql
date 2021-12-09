@@ -141,7 +141,7 @@ CREATE TABLE CustomerAvail (
 	AvailID		INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	CustomerID		INTEGER,
 	TimeCommitment	VARCHAR(256),
-	PRIMARY KEY (InterestID),
+	PRIMARY KEY (AvailID),
 	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 );
 
