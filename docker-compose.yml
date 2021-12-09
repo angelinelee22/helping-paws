@@ -23,6 +23,8 @@ services:
       MYSQL_PASSWORD: test
     ports:
       - "9906:3306"
+    cap_add:
+      - SYS_NICE
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:

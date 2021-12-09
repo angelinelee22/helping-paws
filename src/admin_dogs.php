@@ -1,5 +1,8 @@
 <?php 
-    session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }
     include('components/navbar.php');
     echo "<style>";
     include_once('style/navbar.css');
@@ -71,7 +74,7 @@
                 $row_count++;    
             }
             echo "</table>";
-            echo '<input type="hidden" class="search-id" name="search-id" value="0"' . $row['DogID'] . '>';
+            echo '<input type="hidden" class="search-id" name="search-id" value="0">';
             echo "</form>";
             // Free result set
             $result -> free_result();

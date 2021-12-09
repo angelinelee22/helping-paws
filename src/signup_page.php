@@ -1,5 +1,8 @@
 <?php
-    session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }
     include('components/navbar.php');
     echo "<style>";
     include_once('style/navbar.css');

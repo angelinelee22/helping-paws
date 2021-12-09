@@ -1,5 +1,8 @@
 <?php 
-    session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }
     include('components/navbar.php');
     echo "<style>";
     include_once('style/navbar.css');
@@ -29,8 +32,8 @@
             echo "Failed to connect to MySQL: " . $connection -> connect_error;
             exit();
         }
-        
-        if ($result = $connection -> query("SELECT * FROM customer")) {
+
+        if ($result = $connection -> query("SELECT * FROM Customer;")) {
             echo "<form name='selectable-form' id='selectable-form' method='post'>";
             echo "<h2 style='text-align: left'>Customers</h1>
             <table border='1' id='selectable-table'>
@@ -51,7 +54,7 @@
                 $row_count++;    
             }
             echo "</table>";
-            echo '<input type="hidden" class="search-id" name="search-id" value="0"' . $row['DogID'] . '>';
+            echo '<input type="hidden" class="search-id" name="search-id" value="0">';
             echo "</form>";
             // Free result set
             $result -> free_result();
@@ -72,22 +75,22 @@
 
                 echo "<p><u>Information</u>";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'First Name: <input type="text" value="' . $row['FirstName'] . '" name="name" readonly><br>';
-                    echo 'Last Name: <input type="text" value="' . $row['LastName'] . '" name="age" readonly><br>';
-                    echo 'Username: <input type="text" value="' . $row['Username'] . '" name="age" readonly><br>';
-                    echo 'Password: <input type="text" value="' . $row['Password'] . '" name="sex" readonly><br>';
-                    echo 'Age: <input type="text" value="' . $row['Age'] . '" name="weight" readonly><br>';
-                    echo 'Email on File: <input type="text" value="' . $row['Email'] . '" name="color" readonly><br>';
-                    echo 'Phone Number: <input type="text" value="' . $row['PhoneNumber'] . '" name="trained" readonly><br>';
+                    echo 'First Name: <input type="text" value="' . $row['FirstName'] . '" name="firstname" readonly><br>';
+                    echo 'Last Name: <input type="text" value="' . $row['LastName'] . '" name="lastname" readonly><br>';
+                    echo 'Username: <input type="text" value="' . $row['Username'] . '" name="uname" readonly><br>';
+                    echo 'Password: <input type="text" value="' . $row['Password'] . '" name="pword" readonly><br>';
+                    echo 'Age: <input type="text" value="' . $row['Age'] . '" name="age" readonly><br>';
+                    echo 'Email on File: <input type="text" value="' . $row['Email'] . '" name="email" readonly><br>';
+                    echo 'Phone Number: <input type="text" value="' . $row['PhoneNumber'] . '" name="phonenumber" readonly><br>';
                 echo "</form></p>";
 
                 echo "<p>Address";
                     echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'Street: <input type="text" value="' . $row['Street'] . '" name="pastorg" readonly><br>';
-                    echo 'City: <input type="text" value="' . $row['City'] . '" name="pastowner" readonly><br>';
-                    echo 'State: <input type="text" value="' . $row['State'] . '" name="pastorg" readonly><br>';
-                    echo 'Country: <input type="text" value="' . $row['Country'] . '" name="pastowner" readonly><br>';
-                    echo 'Zip Code: <input type="text" value="' . $row['ZipCode'] . '" name="pastowner" readonly><br>';
+                    echo 'Street: <input type="text" value="' . $row['Street'] . '" name="street" readonly><br>';
+                    echo 'City: <input type="text" value="' . $row['City'] . '" name="city" readonly><br>';
+                    echo 'State: <input type="text" value="' . $row['State'] . '" name="state" readonly><br>';
+                    echo 'Country: <input type="text" value="' . $row['Country'] . '" name="country" readonly><br>';
+                    echo 'Zip Code: <input type="text" value="' . $row['ZipCode'] . '" name="zipcode" readonly><br>';
                 echo "</form></p>";
                 // Free result set
                 $result -> free_result();
@@ -101,11 +104,11 @@
 
                 echo "<p><u>Background</u>";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";
-                    echo 'Salary: <input type="text" value="' . $row['Salary'] . '" name="pastorg" readonly><br>';
-                    echo '# in Household: <input type="text" value="' . $row['NumPeopleHousehold'] . '" name="pastowner" readonly><br>';
-                    echo '# Kids: <input type="text" value="' . $row['NumKids'] . '" name="pastorg" readonly><br>';
-                    echo '# Current Pets: <input type="text" value="' . $row['NumCurrPets'] . '" name="pastowner" readonly><br>';
-                    echo 'Budget: <input type="text" value="' . $row['BUDGET'] . '" name="pastowner" readonly><br>';
+                    echo 'Salary: <input type="text" value="' . $row['Salary'] . '" name="salary" readonly><br>';
+                    echo '# in Household: <input type="text" value="' . $row['NumPeopleHousehold'] . '" name="household" readonly><br>';
+                    echo '# Kids: <input type="text" value="' . $row['NumKids'] . '" name="kids" readonly><br>';
+                    echo '# Current Pets: <input type="text" value="' . $row['NumCurrPets'] . '" name="currpets" readonly><br>';
+                    echo 'Budget: <input type="text" value="' . $row['BUDGET'] . '" name="budget" readonly><br>';
                 echo "</form></p>";
                 echo "<p>Criminal History  <a class='plus-sign' id='add-crim'>&plus;</a>";
                 echo "<form name='selectable-form' class='selectable-form' method='post'>";

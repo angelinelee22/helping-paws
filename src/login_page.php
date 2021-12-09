@@ -1,12 +1,15 @@
 <?php
-    session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }
     include('components/navbar.php');
     echo "<style>";
     include_once('style/navbar.css');
     echo "</style>";
 
     if(isset($_SESSION['username']) || isset($_SESSION['adminname'])) {
-        header('Location:home.php');
+        echo "<script>window.location.replace('./index.php');</script>";
     }
 
     require 'login.php';
@@ -61,7 +64,7 @@
                     session_start();
                     $_SESSION['adminname'] = $un_temp;
                     $_SESSION['password'] = $pw_temp;
-                    header('Location:home.php');
+                    echo "<script>window.location.replace('./index.php');</script>";
                 } else die("Invalid username/password combination");
             } else die("Invalid username/password combination");
         } else {
@@ -75,7 +78,7 @@
                     session_start();
                     $_SESSION['username'] = $un_temp;
                     $_SESSION['password'] = $pw_temp;
-                    header('Location:home.php');
+                    echo "<script>window.location.replace('./index.php');</script>";
                 } else die("Invalid username/password combination");
             } else die("Invalid username/password combination");
         }
