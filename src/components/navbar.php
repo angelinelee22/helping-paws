@@ -48,7 +48,7 @@ function checkDatabase() {
     $connection = new mysqli($hn, $un, $pw, $db) or die ("Unable to connect");
 
     // Reference: https://stackoverflow.com/questions/1012870/sql-to-check-if-database-is-empty-no-tables
-    if($result = $connection -> query("SELECT count(*) FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema = 'testsql';")) {
+    if($result = $connection -> query("SELECT count(*) FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema = 'cs157afinalproj';")) {
         $response = mysqli_fetch_array($result);
 
         if (!$response) {

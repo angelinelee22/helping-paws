@@ -2,5 +2,5 @@
     $hn = 'db';
     $un = 'root';
     $pw = '';
-    $db = 'testsql';
+    $db = 'cs157afinalproj';
 ?>
