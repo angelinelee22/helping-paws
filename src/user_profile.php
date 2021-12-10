@@ -105,14 +105,7 @@ function displayEmployment($first) {
 
 if(htmlentities(isset($_POST['submit']), ENT_QUOTES))
 {
-    submitFile();
+    //TODO if time: Allow users to modify   
 } 
 
-function strposX($haystack, $needle, $number = 0)
-{
-    return strpos($haystack, $needle,
-        $number > 1 ?
-        strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
-    );
-}
 ?>

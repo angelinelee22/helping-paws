@@ -1,63 +1,24 @@
 <?php
-    if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    }
-    include('components/navbar.php');
-    echo "<style>";
-    include_once('style/navbar.css');
-    include_once('style/home.css');
-    echo "</style>";
-    if (isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
-        $password = $_SESSION['password'];
-        echo "Welcome back $username.";
-    } elseif (isset($_SESSION['adminname'])) {
-        $username = $_SESSION['adminname'];
-        $password = $_SESSION['password'];
-        echo "Welcome back $username (admin).";
-    }
-
-    displayTable(TRUE);
-
-    function submitFile() {
-    if ($_FILES)
-    {
-        $filename = htmlentities($_FILES['filename']['name'], ENT_QUOTES);
-        if(htmlentities($_FILES['filename']['type'] == 'text/plain', ENT_QUOTES)) {
-            $n = "test.txt";
-            htmlentities(move_uploaded_file($_FILES['filename']['tmp_name'], $n), ENT_QUOTES);
-            echo "Uploaded text file '$filename' as '$n':<br>";
-            fileHandler($n);
-        } else {
-        echo die("Only TXT files are accepted. <br>");
-        }
-    } else {
-        echo die("No file has been uploaded. <br>");
-    };
-    displayTable(FALSE);
-    }
-
-function fileHandler($filename) {
-    require 'login.php';
-    $connection = new mysqli($hn, $un, $pw, $db) or die ("Unable to connect");
-
-    $name = htmlentities(strval($_POST['user_input']), ENT_QUOTES);
-    if($name == "") {
-        echo die("No file name entered.");
-    }
-    $data = htmlentities(file_get_contents($filename), ENT_QUOTES);
-    $username = htmlentities($_SESSION['username']);
-    $sql = "INSERT INTO files (Content_Name, File_Content, Username) VALUES ('$name', '$data', '$username')";
-
-    if($connection -> query($sql) == TRUE) {
-        echo "Added";
-    } else {
-        echo "Error: " . $sql . "<br>" . $connection->error;
-    }
-
-    $connection -> close();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
 }
+include('components/navbar.php');
+echo "<style>";
+include_once('style/navbar.css');
+include_once('style/home.css');
+echo "</style>";
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $password = $_SESSION['password'];
+    echo "Welcome back $username.";
+} elseif (isset($_SESSION['adminname'])) {
+    $username = $_SESSION['adminname'];
+    $password = $_SESSION['password'];
+    echo "Welcome back $username (admin).";
+}
+
+displayTable(TRUE);
 
 function displayTable($first) {
     if($first == TRUE) {
@@ -102,16 +63,6 @@ function displayTable($first) {
 
 if(htmlentities(isset($_POST['submit']), ENT_QUOTES))
 {
-    submitFile();
+    //TODO if time: Allow users to modify   
 } 
-
-
-
-function strposX($haystack, $needle, $number = 0)
-{
-    return strpos($haystack, $needle,
-        $number > 1 ?
-        strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
-    );
-}
 ?>
