@@ -17,26 +17,6 @@
         displayDogs(TRUE);
     }
     
-    function fileHandler($filename) {
-        require 'login.php';
-        $connection = new mysqli($hn, $un, $pw, $db) or die ("Unable to connect");
-    
-        $name = htmlentities(strval($_POST['user_input']), ENT_QUOTES);
-        if($name == "") {
-            echo die("No file name entered.");
-        }
-        $data = htmlentities(file_get_contents($filename), ENT_QUOTES);
-        $sql = "INSERT INTO files (Content_Name, File_Content, Username) VALUES ('$name', '$data', '$username')";
-    
-        if($connection -> query($sql) == TRUE) {
-            echo "Added";
-        } else {
-            echo "Error: " . $sql . "<br>" . $connection->error;
-        }
-    
-        $connection -> close();
-    }
-    
     function displayDogs($first) {
         if($first == TRUE) {
             ob_start();
@@ -150,5 +130,6 @@
     {
         //TODO if time: Allow users to modify   
     } 
+    echo "<script type='text/javascript' src='scripts/admin.js'></script>";
 
 ?>
