@@ -70,14 +70,14 @@ Password: test
 ```
 
 Below is a screenshot of the server:
-![phpMyAdmin](./screenshots/phpmyadmin.jpg)
+![phpMyAdmin](./screenshots/phpmyadmin.JPG)
 
 ## Website
 Upon entering the website at `http://localhost:8000/`, you should see a login page. At this point, the database has been initialized.
-![login](./screenshots/login.jpg)
+![login](./screenshots/login.JPG)
 
 As a user that hasn't been logged in, you can go to the homepage, but there isn't much to do there.
-![home](./screenshots/home.jpg)
+![home](./screenshots/home.JPG)
 
 Let's sign up for an account! Be careful to meet the following requirements:
 - Username must be at least 5 characters
@@ -86,8 +86,8 @@ Let's sign up for an account! Be careful to meet the following requirements:
 - Email must be in the following format: XXX@XXXXX.XXX
 
 Otherwise, the below will occur:
-![signup fail](./screenshots/signup-fail.jpg)
-![signup fail](./screenshots/signup-fail-2.jpg)
+![signup fail](./screenshots/signup-fail.JPG)
+![signup fail](./screenshots/signup-fail-2.JPG)
 
 After you've signed up, you can login to your account. Please be aware that you cannot create an administrator account from the UI/UX. However, we have initialized the database with pre-existing data that you may use to your liking:
 
@@ -118,12 +118,12 @@ Password: WishIWorkedAtCostco1
 Once you are logged in as an administrator, you will have access to the following: dog database, customer database, and admin profile. Customers only have access to their own profile. When you click on different rows, you will gain access to even more information on the subject, as shown below.
 
 Dog database:
-![dogs database](./screenshots/dogs.jpg)
-![dogs database](./screenshots/dogs-2.jpg)
+![dogs database](./screenshots/dogs.JPG)
+![dogs database](./screenshots/dogs-2.JPG)
 
-Customer database: 
-![customer database](./screenshots/cust.jpg)
-![customer database](./screenshots/cust-2.jpg)
+Customer**** database: 
+![customer database](./screenshots/cust.JPG)
+![customer database](./screenshots/cust-2.JPG)
 
 Profile:
-![profile](./screenshots/profile.jpg)
+![profile](./screenshots/profile.JPG)
