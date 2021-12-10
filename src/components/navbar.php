@@ -58,7 +58,7 @@ function checkDatabase() {
                 $sql = file_get_contents('./components/157finalproject.sql');
                 $connection -> multi_query($sql);
                 // echo '<meta http-equiv="refresh" content="0">';
-                echo "<script>window.location.reload();</script>";
+                echo "<script>window.location.replace('./login_page.php');</script>";
             }
         }
 
